@@ -9,6 +9,7 @@ import pe.nico.jwt.entity.Role;
 import pe.nico.jwt.entity.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -68,5 +69,9 @@ public class UserService {
 
     public String getEncodedPassoword(String password){
         return passwordEncoder.encode(password);
+    }
+
+    public List<User> getAllUsers(){
+        return (List<User>) userRepository.findAll();
     }
 }

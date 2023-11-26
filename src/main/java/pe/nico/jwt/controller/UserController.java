@@ -10,6 +10,7 @@ import pe.nico.jwt.entity.User;
 import pe.nico.jwt.service.UserService;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -29,12 +30,18 @@ public class UserController {
     @GetMapping({"/forAdmin"})
     @PreAuthorize("hasRole('Admin')")
     public String forAdmin(){
-        return "This URL is only accessible to admin";
+        return "Esta URL solo es accesible para el administrador";
     }
 
     @GetMapping({"/forUser"})
     @PreAuthorize("hasRole('User')")
     public String forUser(){
-        return "This URL is only accesible to the user";
+        return "Esta URL sólo es accesible para el usuario.";
+    }
+
+    @GetMapping({"/getAllUsers"})
+    @PreAuthorize("hasRole('Admin')")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 }

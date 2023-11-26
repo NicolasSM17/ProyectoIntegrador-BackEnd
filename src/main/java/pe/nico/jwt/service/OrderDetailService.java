@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class OrderDetailService {
-    private static final String ORDER_PLACED = "Placed";
+    private static final String ORDER_PLACED = "Ordenado";
 
     @Autowired
     private OrderDetailRepository orderDetailRepository;
@@ -31,12 +31,11 @@ public class OrderDetailService {
     public List<OrderDetail> getAllOrderDetails(String status){
         List<OrderDetail> orderDetails = new ArrayList<>();
 
-        if(status.equals("All")){
+        if(status.equals("Todo")){
             orderDetailRepository.findAll().forEach(x -> orderDetails.add(x));
         } else {
             orderDetailRepository.findByOrderStatus(status).forEach(x -> orderDetails.add(x));
         }
-
 
         return orderDetails;
     }
@@ -81,7 +80,7 @@ public class OrderDetailService {
         OrderDetail orderDetail = orderDetailRepository.findById(orderId).get();
 
         if(orderDetail != null){
-            orderDetail.setOrderStatus("Delivered");
+            orderDetail.setOrderStatus("Entregado");
             orderDetailRepository.save(orderDetail);
         }
     }
