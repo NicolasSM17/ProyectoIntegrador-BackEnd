@@ -8,6 +8,7 @@ import pe.nico.jwt.configuration.JwtRequestFilter;
 import pe.nico.jwt.dao.CartRepository;
 import pe.nico.jwt.dao.ProductRepository;
 import pe.nico.jwt.dao.UserRepository;
+import pe.nico.jwt.dto.ProductDto;
 import pe.nico.jwt.entity.Cart;
 import pe.nico.jwt.entity.Product;
 import pe.nico.jwt.entity.User;
@@ -67,5 +68,17 @@ public class ProductService {
 
             return carts.stream().map(x -> x.getProduct()).collect(Collectors.toList());
         }
+    }
+
+    public List<ProductDto> getAllNameProducts(){
+        List<Product> products = productRepository.findAll();
+        List<ProductDto> productsDtos = new ArrayList<>();
+
+        for(Product product : products){
+            ProductDto productDto = new ProductDto();
+            productDto.setProductName(product.getProductName());
+            productsDtos.add(productDto);
+        }
+        return productsDtos;
     }
 }

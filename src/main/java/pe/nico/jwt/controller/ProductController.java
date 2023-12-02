@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pe.nico.jwt.dto.ProductDto;
 import pe.nico.jwt.entity.ImageModel;
 import pe.nico.jwt.entity.Product;
 import pe.nico.jwt.service.ProductService;
@@ -75,5 +76,12 @@ public class ProductController {
                                   @PathVariable(name = "productId") Integer productId){
 
         return productService.getProductDetails(isSingleProductCheckout, productId);
+    }
+
+    //Endpoint del bot
+    @GetMapping({"/getAllNameProducts"})
+    public List<ProductDto> getAllNameProducts(){
+
+        return productService.getAllNameProducts();
     }
 }
