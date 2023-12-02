@@ -11,9 +11,7 @@ import pe.nico.jwt.entity.Product;
 import pe.nico.jwt.service.ProductService;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class ProductController {
@@ -83,5 +81,24 @@ public class ProductController {
     public List<ProductDto> getAllNameProducts(){
 
         return productService.getAllNameProducts();
+    }
+
+    //private final List<ProductDto> productos;
+    /*public ProductController(List<ProductDto> productos) {
+        this.productos = productos;
+    }*/
+
+    @GetMapping("/formato-nuevo")
+    public Map<String, String> obtenerFormatoNuevo() {
+        List<ProductDto> productos = productService.getAllNameProducts();
+        Map<String, String> nuevoFormato = new HashMap<>();
+
+        for (int i = 0; i < productos.size(); i++) {
+            String nombre = "nombre" + (i + 1);
+            String productName = productos.get(i).getProductName();
+            nuevoFormato.put(nombre, productName);
+        }
+
+        return nuevoFormato;
     }
 }
